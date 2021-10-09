@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundedBubbleNavigator">
+
+        <!--        Text Attributes             -->
+        <attr name="textSize" format="dimension"/>
+        <attr name="android:fontFamily"/>
+        <attr name="android:textColor"/>
+
+        <!--        Shape and Background        -->
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="indicatorCircleRadius" format="dimension"/>
+        <attr name="curveDepth" format="dimension"/>
+        <attr name="curveWidth" format="dimension"/>
+
+        <!--              Colors                -->
+        <attr name="circleColor" format="color"/>
+        <attr name="containerBackgroundColor" format="color"/>
+        <attr name="navigatorBackgroundColor" format="color"/>
+
+        <!--        Menu Related                -->
+        <attr name="menu"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="SquareImageView">
+        <attr name="heightOfWidth" format="float"/>
+        <attr name="widthOfHeight" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundedImageView">
+        <attr name="imageCornerRadius" format="dimension"/>
+    </declare-styleable>
+</resources>

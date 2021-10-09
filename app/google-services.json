@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "903673137919",
+    "project_id": "market-243b1",
+    "storage_bucket": "market-243b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903673137919:android:14436ca45931970cd81aca",
+        "android_client_info": {
+          "package_name": "com.bhavin.market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903673137919-s917qbojk3bkrqe1st3l8e9i3gr5sonk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhavin.market",
+            "certificate_hash": "192c16e3b7327cee3ea803c75b0ee7f3ba93ea4f"
+          }
+        },
+        {
+          "client_id": "903673137919-frl8css5kmhliebq5ies2f1nluqdpulu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwbnbLJqoE7DdnmP5X1hQllbx30bTf_XM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903673137919-frl8css5kmhliebq5ies2f1nluqdpulu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

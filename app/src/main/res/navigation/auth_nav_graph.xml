@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sign_and_log"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.bhavin.market.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.bhavin.market.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_OTPAuthFragment"
+            app:destination="@id/OTPAuthFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_addUserDetailsFragment"
+            app:destination="@id/addUserDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/OTPAuthFragment"
+        android:name="com.bhavin.market.OTPAuthFragment"
+        android:label="fragment_o_t_p_auth"
+        tools:layout="@layout/fragment_o_t_p_auth" >
+        <action
+            android:id="@+id/action_OTPAuthFragment_to_addUserDetailsFragment"
+            app:restoreState="true"
+            app:destination="@id/addUserDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserDetailsFragment"
+        android:name="com.bhavin.market.AddUserDetailsFragment"
+        android:label="fragment_add_user_details"
+        tools:layout="@layout/fragment_add_user_details" />
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.bhavin.market.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:launchSingleTop="true"
+            app:exitAnim="@anim/fade"
+            app:popUpTo="@+id/splashScreenFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

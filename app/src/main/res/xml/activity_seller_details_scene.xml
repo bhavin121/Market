@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+       <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/shopName"
+               motion:framePosition="20"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/constraintLayout"
+               motion:framePosition="40"
+               android:alpha="0" />
+       </KeyFrameSet>
+        <OnSwipe motion:touchAnchorId="@+id/linearLayout3" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/view4"
+            android:elevation="5dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:visibility="invisible"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintDimensionRatio="H,2:1.7"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/banner"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/view4"
+            android:elevation="2dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:visibility="visible"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/status"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="15dp"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/backButton"
+            android:elevation="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="visible"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp" />
+        <Constraint
+            android:id="@+id/constraintLayout"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@+id/banner"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp" />
+        <Constraint
+            android:elevation="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            motion:layout_constraintTop_toTopOf="@+id/constraintLayout"
+            android:id="@+id/shopName"
+            android:layout_marginTop="10dp"
+            motion:layout_editor_absoluteX="242dp"
+            motion:layout_constraintStart_toEndOf="@+id/backButton"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="0dp"
+            motion:pathMotionArc="startVertical" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            motion:layout_constraintHeight_default="spread"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="0dp"
+            android:id="@+id/linearLayout3" />
+    </ConstraintSet>
+</MotionScene>

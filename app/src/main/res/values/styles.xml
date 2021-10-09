@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CircleImageStyle" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TextInputField">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/edit_text_bag</item>
+        <item name="android:fontFamily">@font/simvoni</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CapsuleButton">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="backgroundTint">@color/purple_500</item>
+        <item name="cornerRadius">30dp</item>
+    </style>
+
+    <style name="GoogleButton">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:fontFamily">@font/simvoni</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="cornerRadius">30dp</item>
+        <item name="icon">@drawable/google</item>
+        <item name="iconPadding">20dp</item>
+        <item name="iconSize">30dp</item>
+        <item name="iconTint">@null</item>
+    </style>
+
+    <style name="KeyBoardButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">56sp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="elevation">0dp</item>
+        <item name="fontFamily">@font/simvoni</item>
+    </style>
+
+    <style name="EditTextFieldStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeColor">@color/purple_500</item>
+        <item name="boxCornerRadiusBottomEnd">15dp</item>
+        <item name="boxCornerRadiusBottomStart">15dp</item>
+        <item name="boxCornerRadiusTopEnd">15dp</item>
+        <item name="boxCornerRadiusTopStart">15dp</item>
+    </style>
+
+    <style name="ItemName">
+        <item name="android:textColor">#6C6C6C</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/simvoni</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ItemPrice">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/simvoni_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ItemDescription">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/simvoni</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TitleText" parent="ItemName">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ShowAll" parent="ItemPrice">
+        <item name="android:textSize">14sp</item>
+        <item name="android:text">Show All</item>
+        <item name="android:textColor">@color/purple_500</item>
+    </style>
+
+    <style name="SellerTitle" parent="ItemPrice">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="RatingText">
+        <item name="android:text">@string/rating</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/simvoni_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="drawableLeftCompat">@drawable/ic_start_fill</item>
+        <item name="drawableTint">@color/purple_500</item>
+    </style>
+
+    <style name="SellerCategories">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/simvoni_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#DDDDDD</item>
+    </style>
+
+    <style name="TabText">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="10dp">
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <RadioGroup
+            android:id="@+id/categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:checkedButton="@id/fastFood"
+            android:divider="@drawable/divider"
+            android:paddingHorizontal="15dp">
+
+            <RadioButton
+                android:id="@+id/fastFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/categorieMargin"
+                android:text="@string/fast_food"
+                android:paddingHorizontal="20dp"
+                android:elevation="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/categorie_color"
+                android:button="@android:color/transparent"
+                android:background="@drawable/categorie_button_selector"/>
+
+            <RadioButton
+                android:id="@+id/restaurants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/categorieMargin"
+                android:text="@string/restaurants"
+                android:paddingHorizontal="20dp"
+                android:elevation="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/categorie_color"
+                android:button="@android:color/transparent"
+                android:background="@drawable/categorie_button_selector"/>
+
+            <RadioButton
+                android:id="@+id/fruits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/categorieMargin"
+                android:text="@string/fruits_and_vegetables"
+                android:paddingHorizontal="20dp"
+                android:elevation="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/categorie_color"
+                android:button="@android:color/transparent"
+                android:background="@drawable/categorie_button_selector"/>
+
+            <RadioButton
+                android:id="@+id/bakery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/categorieMargin"
+                android:text="@string/bakery"
+                android:paddingHorizontal="20dp"
+                android:elevation="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/categorie_color"
+                android:button="@android:color/transparent"
+                android:background="@drawable/categorie_button_selector"/>
+
+            <RadioButton
+                android:id="@+id/grocery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/categorieMargin"
+                android:text="@string/grocery"
+                android:paddingHorizontal="20dp"
+                android:elevation="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/categorie_color"
+                android:button="@android:color/transparent"
+                android:background="@drawable/categorie_button_selector"/>
+
+            <RadioButton
+                android:id="@+id/sweet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/categorieMargin"
+                android:text="@string/sweets_amp_ice_creams"
+                android:paddingHorizontal="20dp"
+                android:elevation="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/categorie_color"
+                android:button="@android:color/transparent"
+                android:background="@drawable/categorie_button_selector"/>
+
+            <RadioButton
+                android:id="@+id/fashion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/categorieMargin"
+                android:text="@string/fashion"
+                android:paddingHorizontal="20dp"
+                android:elevation="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/categorie_color"
+                android:button="@android:color/transparent"
+                android:background="@drawable/categorie_button_selector"/>
+
+        </RadioGroup>
+
+    </HorizontalScrollView>
+
+</FrameLayout>

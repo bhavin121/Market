@@ -89,4 +89,14 @@
     <string name="my_products">My Products</string>
     <string name="new_nproduct">New Product</string>
     <string name="search">Search</string>
+    <string name="rating_example">4.2 (990)</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="fruits_and_vegetables"><![CDATA[Fruits & Vegetables]]></string>
+    <string name="bakery">Bakery</string>
+    <string name="grocery">Grocery</string>
+    <string name="sweets_amp_ice_creams"><![CDATA[Sweets & Ice-creams]]></string>
+    <string name="fashion">Fashion</string>
 </resources>

@@ -2,6 +2,8 @@ package com.bhavin.market;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import com.bhavin.market.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -14,7 +16,9 @@ public class HomeActivity extends AppCompatActivity {
         ActivityHomeBinding binding = ActivityHomeBinding.inflate ( getLayoutInflater () );
         setContentView( binding.getRoot());
 
-        changeFragment(new SearchFragment());
+        getWindow().setStatusBarColor(Color.WHITE);
+
+        changeFragment(new HomeFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener((NavigationBarView.OnItemSelectedListener) item -> {
             switch (item.getItemId()){

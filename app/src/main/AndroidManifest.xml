@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Market">
         <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".SplashScreen" />
         <activity android:name=".MyOrdersActivity" />
         <activity android:name=".SellerDetailsActivity" />
         <activity android:name=".MainActivity" />

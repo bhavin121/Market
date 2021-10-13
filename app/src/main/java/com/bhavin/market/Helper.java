@@ -6,10 +6,15 @@ import android.view.View;
 import android.view.Window;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bhavin.market.classes.User;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 
 public class Helper {
+
+    public static User user;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void configSourceSharedTransitions(AppCompatActivity activity){
 //        activity.getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);

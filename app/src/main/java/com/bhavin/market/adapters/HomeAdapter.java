@@ -13,7 +13,6 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter< RecyclerView.ViewHolder > {

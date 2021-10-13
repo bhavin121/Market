@@ -74,37 +74,38 @@
         </RadioGroup>
 
         <EditText
-            android:id="@+id/nameField"
+            android:id="@+id/firstName"
             style="@style/TextInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:drawableEnd="@drawable/ic_person"
-            android:hint="@string/enter_name"
+            android:hint="@string/first_name"
             android:importantForAutofill="no"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/emailField"
+            android:id="@+id/lastName"
+            style="@style/TextInputField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableEnd="@drawable/ic_person"
+            android:hint="@string/last_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/phoneField"
             style="@style/TextInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:drawableEnd="@drawable/ic_email"
-            android:hint="@string/enter_email"
+            android:drawableEnd="@drawable/ic_phone"
+            android:hint="@string/enter_mobile"
             android:importantForAutofill="no"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/ageField"
-            style="@style/TextInputField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_calendar"
-            android:hint="@string/date_of_birth"
-            android:importantForAutofill="no"
-            android:inputType="date" />
+            android:inputType="phone" />
 
     </LinearLayout>
 

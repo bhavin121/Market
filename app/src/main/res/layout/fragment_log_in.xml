@@ -45,12 +45,12 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/phoneField"
+            android:id="@+id/userNameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_mobile"
-            android:drawableEnd="@drawable/ic_phone"
-            android:inputType="phone"
+            android:hint="@string/user_name"
+            android:drawableEnd="@drawable/ic_person"
+            android:inputType="textEmailAddress"
             style="@style/TextInputField"/>
 
         <EditText

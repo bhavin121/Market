@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,6 +20,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.bhavin.market.classes.DataBaseError;
+import com.bhavin.market.classes.SuccessMessage;
 import com.bhavin.market.customViews.LoadingDialogBuilder;
 import com.bhavin.market.databinding.FragmentOTPAuthBinding;
 import com.bhavin.market.viewModels.AuthViewModel;
@@ -33,7 +36,6 @@ import java.text.MessageFormat;
 public class OTPAuthFragment extends Fragment {
 
     private final AppCompatImageView []inputViews = new AppCompatImageView[6];
-
     private FragmentOTPAuthBinding binding;
     private AuthViewModel authViewModel;
 
@@ -48,7 +50,7 @@ public class OTPAuthFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentOTPAuthBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -67,7 +69,6 @@ public class OTPAuthFragment extends Fragment {
                 }else{
                     clearLast(otpData.position);
                 }
-                if(otpData.position==6) show();
             }
         });
 
@@ -76,7 +77,19 @@ public class OTPAuthFragment extends Fragment {
             public void onChanged(Task<AuthResult> authResultTask) {
                 if(authResultTask != null){
                     authResultTask.addOnSuccessListener(authResult -> {
-                        Navigation.findNavController(inputViews[0]).navigate(R.id.action_OTPAuthFragment_to_addUserDetailsFragment);
+                        // Send to main page
+                        authViewModel.signUp()
+                                .observe(requireActivity() , successMessageDataBaseErrorPair -> {
+                                    if(successMessageDataBaseErrorPair != null){
+                                        if(successMessageDataBaseErrorPair.first != null & successMessageDataBaseErrorPair.second == null){
+                                            // Sign Up Success
+                                            Toast.makeText(requireContext() , successMessageDataBaseErrorPair.first.getMessage() , Toast.LENGTH_SHORT).show();
+                                        }else if(successMessageDataBaseErrorPair.first == null & successMessageDataBaseErrorPair.second != null){
+                                            // Sign Up Failed
+                                            Toast.makeText(requireContext() , successMessageDataBaseErrorPair.second.getMessage() , Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                         authViewModel.signOutOTP();
                     }).addOnFailureListener(e -> {
                         Toast.makeText(getContext(), "Entered Wrong OTP", Toast.LENGTH_LONG)
@@ -111,38 +124,11 @@ public class OTPAuthFragment extends Fragment {
         authViewModel.appendOTPInput(find(view.getId()));
     };
 
-    public void show(){
-        AlertDialog dialog = LoadingDialogBuilder.build(requireContext());
-        dialog.show();
-    }
-
     public void input(int inputPosition){
         Animation inputAnim = AnimationUtils.loadAnimation(getContext(), R.anim.input_anim);
         inputViews[inputPosition].setImageTintList(ColorStateList.valueOf(Color.BLUE));
         inputViews[inputPosition].startAnimation(inputAnim);
     }
-
-//    private void validateOTP() {
-//        Bundle args = getArguments();
-//        if (args != null) {
-//            String verificationId = args.getString(SignUpFragment.VERIFICATION_ID);
-//            String password = args.getString(SignUpFragment.PASSWORD);
-//            String phone = args.getString(SignUpFragment.PHONE);
-//
-//            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, String.valueOf(6000/*OTP Value here*/));
-//            FirebaseAuth auth = FirebaseAuth.getInstance();
-//            auth.signInWithCredential(credential)
-//                    .addOnSuccessListener(authResult -> {
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString(SignUpFragment.PASSWORD, password);
-//                        bundle.putString(SignUpFragment.PHONE, phone);
-//                        Navigation.findNavController(inputViews[0]).navigate(R.id.action_OTPAuthFragment_to_addUserDetailsFragment);
-//                        auth.signOut();
-//                    })
-//                    .addOnFailureListener(e -> Toast.makeText(getContext(), "Entered Wrong OTP", Toast.LENGTH_LONG)
-//                    .show());
-//        }
-//    }
 
     public void clearLast(int inputPosition){
         Animation outputAnim = AnimationUtils.loadAnimation(getContext(), R.anim.output_anim);

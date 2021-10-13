@@ -3,8 +3,14 @@ package com.bhavin.market.model;
 import android.app.Application;
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
+
+import com.bhavin.market.classes.DataBaseError;
+import com.bhavin.market.classes.SuccessMessage;
+import com.bhavin.market.classes.User;
+import com.bhavin.market.database.DataBaseConnection;
 import com.bhavin.market.viewModels.AuthViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -33,9 +39,48 @@ public class AuthRepository {
 
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestId()
                 .build();
 
         googleSignInClient = GoogleSignIn.getClient(application, options);
+    }
+
+    public MutableLiveData<Pair<User,DataBaseError>> logIn(String userName, String password){
+        MutableLiveData<Pair<User, DataBaseError>> logInLiveData = new MutableLiveData <>(null);
+        DataBaseConnection.validateUser(application , userName , password , new DataBaseConnection.ConnectionListener < User >() {
+            @Override
+            public void onSuccess(User user){
+                Pair<User, DataBaseError> pair = new Pair <>(user, null);
+                logInLiveData.postValue(pair);
+            }
+
+            @Override
+            public void onFailure(DataBaseError error){
+                Pair<User, DataBaseError> pair = new Pair <>(null, error);
+                logInLiveData.postValue(pair);
+            }
+        });
+
+        return logInLiveData;
+    }
+
+    public MutableLiveData<Pair<SuccessMessage,DataBaseError>> signUp(User user){
+        MutableLiveData<Pair<SuccessMessage, DataBaseError>> signUpLiveData = new MutableLiveData <>(null);
+        DataBaseConnection.registerUser(application , user , new DataBaseConnection.ConnectionListener < SuccessMessage >() {
+            @Override
+            public void onSuccess(SuccessMessage successMessage){
+                Pair<SuccessMessage, DataBaseError> pair = new Pair <>(successMessage, null);
+                signUpLiveData.postValue(pair);
+            }
+
+            @Override
+            public void onFailure(DataBaseError error){
+                Pair<SuccessMessage, DataBaseError> pair = new Pair <>(null, error);
+                signUpLiveData.postValue(pair);
+            }
+        });
+
+        return signUpLiveData;
     }
 
     public Task<AuthResult> validateOTP(String verificationId, String otpCode){
@@ -89,6 +134,7 @@ public class AuthRepository {
         try{
             return task.getResult(ApiException.class);
         } catch (ApiException e) {
+            e.printStackTrace();
             return null;
         }
     }

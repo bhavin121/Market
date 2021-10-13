@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bhavin.market.classes.DataBaseError;
+import com.bhavin.market.classes.SuccessMessage;
+import com.bhavin.market.classes.User;
+import com.bhavin.market.database.DataBaseConnection;
 import com.bhavin.market.databinding.FragmentSignUpBinding;
 import com.bhavin.market.viewModels.AuthViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -49,15 +53,7 @@ public class SignUpFragment extends Fragment {
 
         binding.signUp.setOnClickListener(view1 -> {
             if(binding.passwordField.getText().toString().equals(binding.confirmPasswordField.getText().toString())){
-                authViewModel.sendOTP(requireActivity(), binding.phoneField.getText().toString(),binding.passwordField.getText().toString())
-                                .observe(requireActivity(), aBoolean -> {
-                                    if(aBoolean){
-                                        /**
-                                         * On OTP is sent, navigate to OTP Auth Fragment
-                                         */
-                                        Navigation.findNavController(view1).navigate(R.id.action_signUpFragment_to_OTPAuthFragment);
-                                    }
-                                });
+                goToDetailsPage(binding.userName.getText().toString(), binding.passwordField.getText().toString());
             }else{
                 Toast.makeText(getContext(), "Confirm password do not match", Toast.LENGTH_LONG)
                         .show();
@@ -73,49 +69,12 @@ public class SignUpFragment extends Fragment {
         return binding.getRoot();
     }
 
-//    private void sendOtp(View view1) {
-//
-//        String phoneNo = binding.phoneField.getText().toString();
-//        String passwordStr = binding.passwordField.getText().toString();
-//
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        auth.getFirebaseAuthSettings().forceRecaptchaFlowForTesting(true);
-//
-//        PhoneAuthOptions phoneAuthOptions =
-//                PhoneAuthOptions.newBuilder(auth).setPhoneNumber("+91"+phoneNo)
-//                .setTimeout(120L, TimeUnit.SECONDS)
-//                .setActivity(requireActivity())
-//                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-//                    @Override
-//                    public void onVerificationCompleted(@NonNull @NotNull PhoneAuthCredential phoneAuthCredential) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onVerificationFailed(@NonNull @NotNull FirebaseException e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCodeSent(@NonNull @NotNull String verificationId, @NonNull @NotNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString(PHONE, phoneNo);
-//                        bundle.putString(PASSWORD, passwordStr);
-//                        bundle.putString(VERIFICATION_ID, verificationId);
-//                        Navigation.findNavController(view1).navigate(R.id.action_signUpFragment_to_OTPAuthFragment, bundle);
-//                    }
-//                })
-//                .build();
-//
-//        PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
-//    }
-
     @Override
     public void onStart() {
         super.onStart();
         GoogleSignInAccount account = authViewModel.getLastSignedInAccount();
         if(account != null){
-            goToHome(account.getEmail());
+            goToDetailsPage(account.getEmail(), account.getId());
         }
     }
 
@@ -127,12 +86,14 @@ public class SignUpFragment extends Fragment {
             if(account == null){
                 Toast.makeText(requireContext(), "Sign Up Failed", Toast.LENGTH_SHORT).show();
             }else{
-                goToHome(account.getEmail());
+                goToDetailsPage(account.getEmail(), account.getId());
             }
         }
     }
 
-    private void goToHome(String email) {
-
+    private void goToDetailsPage(String userName, String password) {
+        authViewModel.setUserName(binding.userName.getText().toString());
+        authViewModel.setPassword(binding.passwordField.getText().toString());
+        Navigation.findNavController(binding.signUp).navigate(R.id.action_signUpFragment_to_addUserDetailsFragment);
     }
 }

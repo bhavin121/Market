@@ -42,14 +42,14 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/phoneField"
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_mobile"
-            android:drawableEnd="@drawable/ic_phone"
-            android:inputType="phone"
+            android:hint="@string/user_name"
+            android:drawableEnd="@drawable/ic_person"
             style="@style/TextInputField"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/passwordField"

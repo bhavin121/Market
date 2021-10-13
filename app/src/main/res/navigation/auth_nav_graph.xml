@@ -21,9 +21,6 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_OTPAuthFragment"
-            app:destination="@id/OTPAuthFragment" />
-        <action
             android:id="@+id/action_signUpFragment_to_addUserDetailsFragment"
             app:destination="@id/addUserDetailsFragment" />
     </fragment>
@@ -31,17 +28,16 @@
         android:id="@+id/OTPAuthFragment"
         android:name="com.bhavin.market.OTPAuthFragment"
         android:label="fragment_o_t_p_auth"
-        tools:layout="@layout/fragment_o_t_p_auth" >
-        <action
-            android:id="@+id/action_OTPAuthFragment_to_addUserDetailsFragment"
-            app:restoreState="true"
-            app:destination="@id/addUserDetailsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_o_t_p_auth" />
     <fragment
         android:id="@+id/addUserDetailsFragment"
         android:name="com.bhavin.market.AddUserDetailsFragment"
         android:label="fragment_add_user_details"
-        tools:layout="@layout/fragment_add_user_details" />
+        tools:layout="@layout/fragment_add_user_details" >
+        <action
+            android:id="@+id/action_addUserDetailsFragment_to_OTPAuthFragment"
+            app:destination="@id/OTPAuthFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.bhavin.market.SplashScreenFragment"

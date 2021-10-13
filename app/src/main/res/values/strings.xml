@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Market</string>
     <string name="delicious_food">Delicious Food</string>
-    <string name="enter_mobile">Enter mobile</string>
+    <string name="enter_mobile">Mobile</string>
     <string name="sign_up_link_text">New here? <font color="#3612FF">Sign Up</font></string>
     <string name="sign_in">Sign In</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -99,4 +99,8 @@
     <string name="grocery">Grocery</string>
     <string name="sweets_amp_ice_creams"><![CDATA[Sweets & Ice-creams]]></string>
     <string name="fashion">Fashion</string>
+    <string name="profile">Profile</string>
+    <string name="user_name">User name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 </resources>

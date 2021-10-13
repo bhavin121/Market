@@ -4,11 +4,15 @@ import android.app.Application;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+
+import com.bhavin.market.classes.DataBaseError;
+import com.bhavin.market.classes.SuccessMessage;
+import com.bhavin.market.classes.User;
 import com.bhavin.market.model.AuthRepository;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,7 +25,7 @@ public class AuthViewModel extends AndroidViewModel {
     private MutableLiveData<Task<AuthResult>> otpAuthResultsLiveData;
     private final MutableLiveData<Boolean> isOTPSent;
     private final AuthRepository authRepository;
-    private String email, phone, password, verificationId;
+    private String userName, phone, password, verificationId, firstName, lastName, gender;
 
     public AuthViewModel(@NonNull @NotNull Application application) {
         super(application);
@@ -30,9 +34,7 @@ public class AuthViewModel extends AndroidViewModel {
         isOTPSent = new MutableLiveData<>(false);
     }
 
-    public MutableLiveData<Boolean> sendOTP(FragmentActivity activity, String phone, String password){
-        this.phone = phone;
-        this.password = password;
+    public MutableLiveData<Boolean> sendOTP(FragmentActivity activity, String phone){
         authRepository.sendOTP(activity, phone)
                 .observe(activity, otpStatus -> {
                     if(otpStatus.isOTPSent){
@@ -41,6 +43,22 @@ public class AuthViewModel extends AndroidViewModel {
                     }
                 });
         return isOTPSent;
+    }
+
+    public MutableLiveData<Pair<User,DataBaseError>> logIn(String userName, String password){
+        return authRepository.logIn(userName, password);
+    }
+
+    public MutableLiveData<Pair<SuccessMessage,DataBaseError>> signUp(){
+        User user = new User();
+        user.setEmail(userName);
+        user.setPassword(password);
+        user.setGender(gender);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setContactNo(phone);
+
+        return authRepository.signUp(user);
     }
 
     public GoogleSignInAccount getLastSignedInAccount(){
@@ -94,12 +112,36 @@ public class AuthViewModel extends AndroidViewModel {
         }
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName( ){
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+
+    public String getFirstName( ){
+        return firstName;
+    }
+
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
+    }
+
+    public String getLastName( ){
+        return lastName;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+
+    public String getGender( ){
+        return gender;
+    }
+
+    public void setGender(String gender){
+        this.gender = gender;
     }
 
     public String getPhone() {

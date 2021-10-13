@@ -6,11 +6,13 @@ import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 import android.os.Bundle;
 import android.os.Handler;
+import android.webkit.CookieManager;
 
+import com.bhavin.market.database.DataBaseConnection;
 import com.bhavin.market.databinding.FragmentOTPAuthBinding;
 import com.bhavin.market.databinding.ProductCardBinding;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     NavController navController;
 
@@ -23,6 +25,6 @@ public class MainActivity extends AppCompatActivity{
 
         NavHostFragment fragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navHost);
         navController = fragment != null ? fragment.getNavController() : null;
-
     }
+
 }

@@ -103,4 +103,13 @@
     <string name="user_name">User name</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="personal_data">Personal Data</string>
+    <string name="past_orders">Past Orders</string>
+    <string name="offers">Offers</string>
+    <string name="favourite">Favourite</string>
+    <string name="faq_s">FAQ\'s</string>
+    <string name="log_out">Log Out</string>
+    <string name="my_addresses">My Addresses</string>
+    <string name="add_new">Add New</string>
+    <string name="save">Save</string>
 </resources>

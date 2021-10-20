@@ -96,4 +96,7 @@ public class User {
         this.contactNo = contactNo;
     }
 
+    public boolean isSeller(){
+        return (flagSeller.equals("1"))?true:false;
+    }
 }

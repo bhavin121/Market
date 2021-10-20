@@ -90,7 +90,7 @@ public class LogInFragment extends Fragment{
                         }else if(userDataBaseErrorPair.second==null & userDataBaseErrorPair.first != null){
                             // Log in success
                             Helper.user = userDataBaseErrorPair.first;
-                            startActivity(new Intent(requireContext(), TestActivity.class));
+                            startActivity(new Intent(requireContext(), HomeActivity.class));
                         }
                     }
                 });

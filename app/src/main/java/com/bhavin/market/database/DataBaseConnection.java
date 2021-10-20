@@ -11,7 +11,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bhavin.market.classes.Address;
 import com.bhavin.market.classes.DataBaseError;
+import com.bhavin.market.classes.FAQ;
+import com.bhavin.market.classes.Seller;
 import com.bhavin.market.classes.SuccessMessage;
 import com.bhavin.market.classes.User;
 import com.google.gson.Gson;
@@ -47,6 +50,40 @@ public class DataBaseConnection {
         map.put("key", KEY);
 
         establishConnection(context,map, url, Request.Method.POST, listener, SuccessMessage.class);
+    }
+
+    public static void registerSeller(Context context, Seller seller, Address address, ConnectionListener<SuccessMessage> listener){
+        String url = "http://44akash44.great-site.net/seller_registration.php"; // API Url
+
+        Map<String, String> map = new HashMap<>();
+        map.put("email", address.getEmail());
+        map.put("pinCode", address.getPincode());
+        map.put("city", address.getCity());
+        map.put("state", address.getState());
+        map.put("country", address.getCountry());
+        map.put("street", address.getStreetLane());
+        map.put("seller_flag", address.getFlagSeller());
+        map.put("phone", address.getPhoneNo());
+        map.put("lat", address.getLatitude());
+        map.put("lng", address.getLongtitude());
+
+        map.put("gst_no", seller.getGstNo());
+        map.put("shop_name", seller.getShopName());
+        map.put("start_timing", seller.getTimingStart());
+        map.put("end_timing", seller.getTimingEnd());
+        map.put("category", seller.getCategory());
+        map.put("banner_url", seller.getBannerUrl());
+        map.put("reg_date", seller.getRegistrationDate());
+        map.put("key", KEY);
+
+        establishConnection(context, map, url, Request.Method.POST, listener, SuccessMessage.class);
+    }
+
+    public static void fetchFAQs(Context context, ConnectionListener<FAQ> listener){
+        String url = "http://44akash44.great-site.net/";
+        Map<String, String> map = new HashMap<>();
+        map.put("key", KEY);
+        establishConnection(context, map, url, Request.Method.POST, listener, FAQ.class);
     }
 
     private static <T> void establishConnection(Context context, Map<String, String> map, String url, int requestType, ConnectionListener<T> listener, Class<T> type){

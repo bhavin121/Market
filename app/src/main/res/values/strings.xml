@@ -1,4 +1,23 @@
 <resources>
+
+    <string-array name="categories">
+        <item>@string/fast_food</item>
+        <item>@string/restaurants</item>
+        <item>@string/fruits_and_vegetables</item>
+        <item>@string/bakery</item>
+        <item>@string/grocery</item>
+        <item>@string/sweets_amp_ice_creams</item>
+        <item>@string/fashion</item>
+    </string-array>
+
+    <string-array name="units">
+        <item>Kilogram</item>
+        <item>Litre</item>
+        <item>Units</item>
+        <item>Grams</item>
+        <item>Meters</item>
+    </string-array>
+
     <string name="app_name">Market</string>
     <string name="delicious_food">Delicious Food</string>
     <string name="enter_mobile">Mobile</string>
@@ -17,7 +36,7 @@
     <string name="cart">Cart</string>
     <string name="sell">Sell</string>
     <string name="log_in">Log In</string>
-    <string name="message">Make your shopping easier with us, same day delivery within 3 hours</string>
+    <string name="message">Message</string>
     <string name="details">Details</string>
     <string name="review">Review</string>
     <string name="item_name">Strawberry Ice Cream</string>
@@ -112,4 +131,22 @@
     <string name="my_addresses">My Addresses</string>
     <string name="add_new">Add New</string>
     <string name="save">Save</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="register">Register</string>
+    <string name="pick_address">Pick Address</string>
+    <string name="pick_shop_banner">Pick Shop Banner</string>
+    <string name="recommended_image_ratio_1_1_9">Recommended Image Ratio 1:1.9</string>
+    <string name="seller_registration">Seller Registration</string>
+    <string name="shop_name_">Shop Name</string>
+    <string name="opening_time">Opening Time</string>
+    <string name="closing_time">Closing Time</string>
+    <string name="gst_no">GST No</string>
+    <string name="contact_no">Contact No</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="country">Country</string>
+    <string name="street_lane">Street/Lane</string>
+    <string name="sell_message">Start your shop in few steps and Grow your sell</string>
+    <string name="pin_code">Pin Code</string>
+    <string name="hello">Hello</string>
 </resources>

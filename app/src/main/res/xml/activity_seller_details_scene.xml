@@ -17,7 +17,7 @@
                motion:framePosition="40"
                android:alpha="0" />
        </KeyFrameSet>
-        <OnSwipe motion:touchAnchorId="@+id/linearLayout3" />
+        <OnSwipe motion:touchAnchorId="@+id/favourite" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -103,6 +103,6 @@
             motion:layout_constraintHeight_default="spread"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="0dp"
-            android:id="@+id/linearLayout3" />
+            android:id="@+id/favourite" />
     </ConstraintSet>
 </MotionScene>

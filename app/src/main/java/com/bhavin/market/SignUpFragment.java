@@ -92,8 +92,8 @@ public class SignUpFragment extends Fragment {
     }
 
     private void goToDetailsPage(String userName, String password) {
-        authViewModel.setUserName(binding.userName.getText().toString());
-        authViewModel.setPassword(binding.passwordField.getText().toString());
+        authViewModel.setUserName(userName);
+        authViewModel.setPassword(password);
         Navigation.findNavController(binding.signUp).navigate(R.id.action_signUpFragment_to_addUserDetailsFragment);
     }
 }

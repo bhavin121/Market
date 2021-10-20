@@ -66,6 +66,7 @@ public class AuthRepository {
 
     public MutableLiveData<Pair<SuccessMessage,DataBaseError>> signUp(User user){
         MutableLiveData<Pair<SuccessMessage, DataBaseError>> signUpLiveData = new MutableLiveData <>(null);
+        System.out.println(user.getEmail()+" "+user.getPassword());
         DataBaseConnection.registerUser(application , user , new DataBaseConnection.ConnectionListener < SuccessMessage >() {
             @Override
             public void onSuccess(SuccessMessage successMessage){

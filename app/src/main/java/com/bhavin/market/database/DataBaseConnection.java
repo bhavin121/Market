@@ -15,6 +15,7 @@ import com.bhavin.market.classes.Address;
 import com.bhavin.market.classes.DataBaseError;
 import com.bhavin.market.classes.FAQ;
 import com.bhavin.market.classes.Seller;
+import com.bhavin.market.classes.SellerData;
 import com.bhavin.market.classes.SuccessMessage;
 import com.bhavin.market.classes.User;
 import com.google.gson.Gson;
@@ -52,7 +53,7 @@ public class DataBaseConnection {
         establishConnection(context,map, url, Request.Method.POST, listener, SuccessMessage.class);
     }
 
-    public static void registerSeller(Context context, Seller seller, Address address, ConnectionListener<SuccessMessage> listener){
+    public static void registerSeller(Context context, Seller seller, Address address, ConnectionListener<SellerData> listener){
         String url = "http://44akash44.great-site.net/seller_registration.php"; // API Url
 
         Map<String, String> map = new HashMap<>();
@@ -76,7 +77,7 @@ public class DataBaseConnection {
         map.put("reg_date", seller.getRegistrationDate());
         map.put("key", KEY);
 
-        establishConnection(context, map, url, Request.Method.POST, listener, SuccessMessage.class);
+        establishConnection(context, map, url, Request.Method.POST, listener, SellerData.class);
     }
 
     public static void fetchFAQs(Context context, ConnectionListener<FAQ> listener){

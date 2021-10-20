@@ -5,8 +5,10 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
+
 import com.bhavin.market.classes.FAQ;
+import com.bhavin.market.model.CommonRepository;
+
 import org.jetbrains.annotations.NotNull;
 
 public class FAQViewModel extends AndroidViewModel {

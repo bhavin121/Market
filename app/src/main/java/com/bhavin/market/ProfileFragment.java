@@ -21,7 +21,7 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
 
-    public ProfileFragment( ){
+    public ProfileFragment(){
         // Required empty public constructor
     }
 

@@ -99,4 +99,8 @@ public class User {
     public boolean isSeller(){
         return (flagSeller.equals("1"))?true:false;
     }
+
+    public void setFlagSeller(boolean var){
+        flagSeller = (var)?"1":"0";
+    }
 }

@@ -2,27 +2,21 @@ package com.bhavin.market.model;
 
 import android.app.Application;
 import android.net.Uri;
-
-import androidx.annotation.NonNull;
+import android.util.Pair;
 import androidx.lifecycle.MutableLiveData;
-
+import com.bhavin.market.Helper;
 import com.bhavin.market.classes.Address;
 import com.bhavin.market.classes.DataBaseError;
 import com.bhavin.market.classes.Seller;
-import com.bhavin.market.classes.SuccessMessage;
+import com.bhavin.market.classes.SellerData;
 import com.bhavin.market.database.DataBaseConnection;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.UUID;
 
 public class SellerRegistrationRepository {
 
-    private Application application;
+    private final Application application;
     private final FirebaseStorage firebaseStorage;
 
     public SellerRegistrationRepository(Application application){
@@ -36,27 +30,28 @@ public class SellerRegistrationRepository {
         StorageReference photoReference = reference.child("images/"+ UUID.randomUUID().toString());
 
         photoReference.putFile(photo)
-                .addOnSuccessListener(taskSnapshot -> {
-                    photoReference.getDownloadUrl().addOnSuccessListener(uri -> resultMutableLiveData.postValue(new UploadResult(true, true, uri)))
-                            .addOnFailureListener(e -> resultMutableLiveData.postValue(new UploadResult(false, true, null)));
-                })
+                .addOnSuccessListener(taskSnapshot -> photoReference.getDownloadUrl().addOnSuccessListener(uri -> resultMutableLiveData.postValue(new UploadResult(true, true, uri)))
+                        .addOnFailureListener(e -> resultMutableLiveData.postValue(new UploadResult(false, true, null))))
                 .addOnFailureListener(e -> resultMutableLiveData.postValue(new UploadResult(false, true, null)));
 
         return resultMutableLiveData;
     }
 
-    public void registerSeller(Seller seller, Address address){
-        DataBaseConnection.registerSeller(application , seller , address , new DataBaseConnection.ConnectionListener<SuccessMessage>() {
+    public MutableLiveData<Pair<Boolean,SellerData>> registerSeller(Seller seller, Address address){
+        MutableLiveData<Pair<Boolean,SellerData>> res = new MutableLiveData<>(new Pair<>(false, null));
+        DataBaseConnection.registerSeller(application , seller , address , new DataBaseConnection.ConnectionListener<SellerData>() {
             @Override
-            public void onSuccess(SuccessMessage successMessage){
-
+            public void onSuccess(SellerData sellerData){
+                res.postValue(new Pair<>(true, sellerData));
+                Helper.user.setFlagSeller(true);
             }
 
             @Override
             public void onFailure(DataBaseError error){
-
+                res.postValue(new Pair<>(true, null));
             }
         });
+        return res;
     }
 
     public static class UploadResult{

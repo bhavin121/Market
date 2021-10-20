@@ -30,6 +30,7 @@ public class SellerRegistrationFragment extends Fragment {
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri photo;
     private ArrayAdapter<CharSequence> adapter;
+    private Listener listener;
 
     public SellerRegistrationFragment(){
         // Required empty public constructor
@@ -38,6 +39,11 @@ public class SellerRegistrationFragment extends Fragment {
     @Override
     public void onAttach(@NonNull @NotNull Context context){
         super.onAttach(context);
+        if(context instanceof Listener){
+            listener = (Listener) context;
+        }else{
+            System.err.println(context.getClass() + " must implement SellerRegistrationFragment.Listener");
+        }
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult() ,
                 result -> {
                     if(result.getResultCode() == Activity.RESULT_OK){
@@ -119,7 +125,17 @@ public class SellerRegistrationFragment extends Fragment {
             }
 
             // Start registration
-            viewModel.registerSeller(seller, address, photo);
+            viewModel.registerSeller(seller, address, photo)
+                    .observe(requireActivity() , booleanSellerDataPair -> {
+                        if(booleanSellerDataPair.first){
+                            if(booleanSellerDataPair.second == null){
+                                Toast.makeText(requireContext() , "Seller Registration Failed" , Toast.LENGTH_SHORT).show();
+                            }else{
+                                Helper.sellerData = booleanSellerDataPair.second;
+                                listener.onRegistrationSuccess();
+                            }
+                        }
+                    });
         }else{
             Toast.makeText(requireContext() , "Please pick a photo" , Toast.LENGTH_SHORT).show();
         }
@@ -138,5 +154,9 @@ public class SellerRegistrationFragment extends Fragment {
         }
 
         return flag;
+    }
+
+    public interface Listener{
+        void onRegistrationSuccess();
     }
 }

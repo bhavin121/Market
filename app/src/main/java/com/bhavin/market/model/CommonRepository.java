@@ -1,10 +1,8 @@
-package com.bhavin.market.viewModels;
+package com.bhavin.market.model;
 
 import android.app.Application;
 import android.util.Pair;
-
 import androidx.lifecycle.MutableLiveData;
-
 import com.bhavin.market.classes.DataBaseError;
 import com.bhavin.market.classes.FAQ;
 import com.bhavin.market.database.DataBaseConnection;

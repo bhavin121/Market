@@ -367,10 +367,6 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <include
-            layout="@layout/shop_card"
-            />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>

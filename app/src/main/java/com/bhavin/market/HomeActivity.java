@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.bhavin.market.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NoSellerFragment.Listener {
 
     @SuppressLint ("NonConstantResourceId")
     @Override
@@ -54,5 +54,10 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, fragment)
                 .commit();
+    }
+
+    @Override
+    public void onRegistrationSuccess(){
+        changeFragment(new SellerPanelFragment());
     }
 }

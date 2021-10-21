@@ -160,4 +160,9 @@
     <string name="color">Color</string>
     <string name="xl">XL</string>
     <string name="blue">Blue</string>
+    <string name="add_color">Add Color</string>
+    <string name="add_size">Add Size</string>
+    <string name="ffffff">#ffffff</string>
+    <string name="color_name">Color Name</string>
+    <string name="size">Size</string>
 </resources>

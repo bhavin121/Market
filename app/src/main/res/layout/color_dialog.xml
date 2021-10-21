@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.github.dhaval2404.colorpicker.ColorPickerView
+        android:id="@+id/colorPickerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/colorCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bag"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorPickerView">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/colorImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/circle2"
+            />
+
+        <TextView
+            android:id="@+id/color"
+            android:background="@android:color/transparent"
+            style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:text="@string/ffffff"
+            android:importantForAutofill="no" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <EditText
+        android:id="@+id/name"
+        style="@style/TextInputField"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/color_name"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorCode" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

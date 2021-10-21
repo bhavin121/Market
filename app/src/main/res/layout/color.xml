@@ -7,11 +7,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:cardCornerRadius="20dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="30dp"
         android:layout_margin="5dp"
-        app:contentPadding="7dp">
+        app:contentPadding="10dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"

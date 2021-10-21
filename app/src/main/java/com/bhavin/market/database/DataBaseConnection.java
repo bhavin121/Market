@@ -100,6 +100,7 @@ public class DataBaseConnection {
                         // Success Listener
                         response -> {
                             Gson gson = new GsonBuilder().create();
+                            System.out.println(response);
                             if(response.contains("ERROR:")){
                                 DataBaseError error = gson.fromJson(response.replaceFirst("ERROR:",""), DataBaseError.class);
                                 listener.onFailure(error);

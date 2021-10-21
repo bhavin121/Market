@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
                     break;
                 case R.id.sell:
                     if(Helper.user != null){
-                        changeFragment((true/*Helper.user.isSeller()*/)?new SellerPanelFragment(): new NoSellerFragment().setListener(( ) -> changeFragment(new SellerPanelFragment())));
+                        changeFragment((/*true*/Helper.user.isSeller())?new SellerPanelFragment(): new NoSellerFragment().setListener(( ) -> changeFragment(new SellerPanelFragment())));
                     }else{
                         Toast.makeText(this , "There is some problem" , Toast.LENGTH_SHORT).show();
                     }

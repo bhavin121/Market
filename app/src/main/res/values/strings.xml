@@ -149,4 +149,13 @@
     <string name="sell_message">Start your shop in few steps and Grow your sell</string>
     <string name="pin_code">Pin Code</string>
     <string name="hello">Hello</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_details">Product Details</string>
+    <string name="price_">Price</string>
+    <string name="available_units">Available Units</string>
+    <string name="minimum_selling_quantity">Minimum Selling Quantity</string>
+    <string name="increment_size">Increment Size</string>
+    <string name="unit_of_sell">Unit of sell</string>
+    <string name="variants">Variants</string>
+    <string name="color">Color</string>
 </resources>

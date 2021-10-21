@@ -32,11 +32,6 @@ public class NoSellerFragment extends Fragment {
     @Override
     public void onAttach(@NonNull @NotNull Context context){
         super.onAttach(context);
-        if(context instanceof SellerRegistrationFragment.Listener){
-            listener = (Listener) context;
-        }else{
-            System.err.println(context.getClass() + " must implement SellerRegistrationFragment.Listener");
-        }
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult() ,
                 result -> {
                     if(result.getResultCode() == Activity.RESULT_OK){
@@ -62,6 +57,11 @@ public class NoSellerFragment extends Fragment {
         binding.registerButton.setOnClickListener(view1 -> {
             activityResultLauncher.launch(new Intent(requireContext(), SellerRegistrationActivity.class));
         });
+    }
+
+    public NoSellerFragment setListener(Listener listener){
+        this.listener = listener;
+        return this;
     }
 
     public interface Listener{

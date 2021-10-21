@@ -116,16 +116,18 @@ public class SellerRegistrationFragment extends Fragment {
             Seller seller = new Seller();
             seller.setGstNo(binding.gstNo.getText().toString());
             seller.setShopName(binding.shopName.getText().toString());
-            seller.setTimingStart(binding.openingTime.getText().toString());
-            seller.setTimingEnd(binding.closingTime.getText().toString());
+            seller.setTimingStart(binding.openingTime.getText().toString()+":00");
+            seller.setTimingEnd(binding.closingTime.getText().toString()+":00");
             seller.setCategory(adapter.getItem(binding.categories.getSelectedItemPosition()).toString());
 
+            System.out.println(seller.getTimingStart());
+            System.out.println(seller.getTimingEnd());
             if(anyFieldEmpty(address, seller)){
                 return;
             }
 
             // Start registration
-            viewModel.registerSeller(seller, address, photo)
+            viewModel.registerSeller(requireActivity(),seller, address, photo)
                     .observe(requireActivity() , booleanSellerDataPair -> {
                         if(booleanSellerDataPair.first){
                             if(booleanSellerDataPair.second == null){

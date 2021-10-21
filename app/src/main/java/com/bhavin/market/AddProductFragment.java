@@ -1,6 +1,5 @@
 package com.bhavin.market;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,30 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bhavin.market.databinding.FragmentSellerPanelBinding;
+import com.bhavin.market.databinding.FragmentAddProductBinding;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SellerPanelFragment extends Fragment {
+public class AddProductFragment extends Fragment {
 
-    private FragmentSellerPanelBinding binding;
+    public FragmentAddProductBinding binding;
 
-    public SellerPanelFragment() {
+    public AddProductFragment( ){
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentSellerPanelBinding.inflate(inflater, container, false);
+    public View onCreateView(LayoutInflater inflater , ViewGroup container ,
+                             Bundle savedInstanceState){
+        // Inflate the layout for this fragment
+        binding = FragmentAddProductBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view , @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState){
         super.onViewCreated(view , savedInstanceState);
-        binding.addProduct.setOnClickListener(view1 -> {
-            startActivity(new Intent(requireContext(), AddProductActivity.class));
-        });
     }
 }

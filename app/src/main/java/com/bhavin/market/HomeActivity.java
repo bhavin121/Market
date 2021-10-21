@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.bhavin.market.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class HomeActivity extends AppCompatActivity implements NoSellerFragment.Listener {
+public class HomeActivity extends AppCompatActivity {
 
     @SuppressLint ("NonConstantResourceId")
     @Override
@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity implements NoSellerFragment.
                     break;
                 case R.id.sell:
                     if(Helper.user != null){
-                        changeFragment((Helper.user.isSeller())?new SellerPanelFragment(): new NoSellerFragment());
+                        changeFragment((true/*Helper.user.isSeller()*/)?new SellerPanelFragment(): new NoSellerFragment().setListener(( ) -> changeFragment(new SellerPanelFragment())));
                     }else{
                         Toast.makeText(this , "There is some problem" , Toast.LENGTH_SHORT).show();
                     }
@@ -54,10 +54,5 @@ public class HomeActivity extends AppCompatActivity implements NoSellerFragment.
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, fragment)
                 .commit();
-    }
-
-    @Override
-    public void onRegistrationSuccess(){
-        changeFragment(new SellerPanelFragment());
     }
 }

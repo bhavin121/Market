@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.util.Pair;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -59,18 +60,19 @@ public class SellerRegistrationViewModel extends AndroidViewModel {
         }
     }
 
-    public MutableLiveData<Pair<Boolean,SellerData>> registerSeller(Seller seller , com.bhavin.market.classes.Address address, Uri photo){
+    public MutableLiveData<Pair<Boolean,SellerData>> registerSeller(FragmentActivity activity, Seller seller , com.bhavin.market.classes.Address address, Uri photo){
         MutableLiveData<Pair<Boolean,SellerData>> res = new MutableLiveData<>(new Pair<>(false, null));
 
         address.setLatitude(String.valueOf(currentLatLng.latitude));
         address.setLongtitude(String.valueOf(currentLatLng.longitude));
-        repository.uploadImage(photo).observe(getApplication() , uploadResult -> {
+        repository.uploadImage(photo).observe(activity , uploadResult -> {
             if(uploadResult.wasUploading){
                 if(uploadResult.uploadSuccess){
                     seller.setBannerUrl(uploadResult.photoUrl.toString());
                     seller.setRegistrationDate(getDateAndTime());
+                    System.out.println(seller.getRegistrationDate());
                     repository.registerSeller(seller, address).observe(
-                            getApplication() ,
+                            activity ,
                             res::postValue
                     );
                 }else{
@@ -83,7 +85,7 @@ public class SellerRegistrationViewModel extends AndroidViewModel {
     }
 
     private String getDateAndTime( ){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         return sdf.format(new Date());
     }
 }

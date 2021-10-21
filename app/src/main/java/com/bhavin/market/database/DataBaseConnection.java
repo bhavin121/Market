@@ -105,7 +105,6 @@ public class DataBaseConnection {
                                 listener.onFailure(error);
                             }
                             else{
-                                System.out.println(response);
                                 T t = gson.fromJson(response, type);
                                 listener.onSuccess(t);
                             }

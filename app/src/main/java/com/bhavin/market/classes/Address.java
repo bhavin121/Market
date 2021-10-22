@@ -1,6 +1,8 @@
 package com.bhavin.market.classes;
 
 import javax.annotation.Generated;
+
+import com.google.android.gms.common.util.ScopeUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -131,5 +133,10 @@ public class Address {
 
     public void setSellerFlag(boolean flag){
         flagSeller = (flag)?"1":"0";
+    }
+
+    @Override
+    public String toString(){
+        return streetLane+","+city+","+state+","+ country+",\n"+pincode+"\nMo."+phoneNo;
     }
 }

@@ -3,7 +3,10 @@ package com.bhavin.market.model;
 import android.app.Application;
 import android.net.Uri;
 import android.util.Pair;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
+
 import com.bhavin.market.Helper;
 import com.bhavin.market.classes.Address;
 import com.bhavin.market.classes.DataBaseError;
@@ -12,6 +15,9 @@ import com.bhavin.market.classes.SellerData;
 import com.bhavin.market.database.DataBaseConnection;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class SellerRegistrationRepository {
@@ -35,6 +41,37 @@ public class SellerRegistrationRepository {
                 .addOnFailureListener(e -> resultMutableLiveData.postValue(new UploadResult(false, true, null)));
 
         return resultMutableLiveData;
+    }
+
+    public MutableLiveData<Pair<Boolean,List<String>>> uploadImageList(List<Uri> uriList){
+        StorageReference reference = firebaseStorage.getReference();
+        List<String> photoUrlList = new ArrayList<>();
+        MutableLiveData<Pair<Boolean, List<String>>> res = new MutableLiveData<>(new Pair<>(false, null));
+
+        for(Uri uri:uriList) {
+            StorageReference photoReference = reference.child("images/"+ UUID.randomUUID().toString());
+
+            photoReference.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+                photoReference.getDownloadUrl().addOnSuccessListener(uri1 -> {
+                    photoUrlList.add(uri1.toString());
+
+                    if(photoUrlList.size() == uriList.size()){
+                        // All uploaded
+                        res.postValue(new Pair<>(true, photoUrlList));
+                    }
+                }).addOnFailureListener(e -> {
+                    res.postValue(new Pair<>(true, null));
+                });
+            }).addOnFailureListener(e -> {
+                res.postValue(new Pair<>(true, null));
+            });
+        }
+
+        return res;
+    }
+
+    public void addNewProduct(){
+
     }
 
     public MutableLiveData<Pair<Boolean,SellerData>> registerSeller(Seller seller, Address address){

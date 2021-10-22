@@ -80,6 +80,13 @@ public class DataBaseConnection {
         establishConnection(context, map, url, Request.Method.POST, listener, SellerData.class);
     }
 
+    public static void addNewProduct(){
+        String url = "http://44akash44.great-site.net/seller_registration.php";
+
+        Map<String, String> map = new HashMap<>();
+        map.put("key", KEY);
+    }
+
     public static void fetchFAQs(Context context, ConnectionListener<FAQ> listener){
         String url = "http://44akash44.great-site.net/";
         Map<String, String> map = new HashMap<>();

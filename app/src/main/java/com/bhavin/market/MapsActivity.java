@@ -1,6 +1,8 @@
 package com.bhavin.market;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.bhavin.market.databinding.ActivityMapsBinding;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -19,8 +23,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private LatLng currentLatLng;
-
-    private boolean action;
+    public static final String RESULT = "res";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,6 +49,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         try {
             List<Address> addresses = geocoder.getFromLocation(currentLatLng.latitude , currentLatLng.longitude , 1);
             Address address = addresses.get(0);
+
+            com.bhavin.market.classes.Address addressRes = new com.bhavin.market.classes.Address();
+            addressRes.setCountry(address.getCountryName());
+            addressRes.setState(address.getAdminArea());
+            addressRes.setCity(address.getLocality());
+            addressRes.setStreetLane(address.getSubLocality());
+            addressRes.setPincode(address.getPostalCode());
+            addressRes.setLongtitude(String.valueOf(currentLatLng.longitude));
+            addressRes.setLatitude(String.valueOf(currentLatLng.latitude));
+
+            String res = new GsonBuilder().create().toJson(addressRes);
+            Intent intent = new Intent();
+            intent.putExtra(RESULT, res);
+            setResult(RESULT_OK, intent);
+            finish();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -60,7 +60,7 @@
     <string name="pick_a_photo">Pick a photo</string>
     <string name="choose">Choose</string>
     <string name="chosen_photos">Chosen Photos</string>
-    <string name="no_image">No<br />Image<br />Chosen</string>
+    <string name="no_image">No Image Chosen</string>
     <string name="next">Next</string>
     <string name="your_bag">Your Bag</string>
     <string name="count">3 Items</string>

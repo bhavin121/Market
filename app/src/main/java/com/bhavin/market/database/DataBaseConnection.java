@@ -87,6 +87,22 @@ public class DataBaseConnection {
         map.put("key", KEY);
     }
 
+    public static void addNewAddress(Context context, Address address, ConnectionListener<SuccessMessage> listener){
+        String url = "http://44akash44.great-site.net/add_address.php";
+        Map<String, String> map = new HashMap<>();
+        map.put("email", address.getEmail());
+        map.put("pinCode", address.getPincode());
+        map.put("city", address.getCity());
+        map.put("state", address.getState());
+        map.put("country", address.getCountry());
+        map.put("street", address.getStreetLane());
+        map.put("phone", address.getPhoneNo());
+        map.put("lat", address.getLatitude());
+        map.put("lng", address.getLongtitude());
+        map.put("key", KEY);
+        establishConnection(context, map, url, Request.Method.POST, listener, SuccessMessage.class);
+    }
+
     public static void fetchFAQs(Context context, ConnectionListener<FAQ> listener){
         String url = "http://44akash44.great-site.net/";
         Map<String, String> map = new HashMap<>();

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.bhavin.market.customViews.RoundedImageView
+        android:id="@+id/photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_margin="10dp"
         android:scaleType="centerCrop"
         android:src="@drawable/shoe_bag"
-        app:imageCornerRadius="30dp"
+        app:imageCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,10 +21,14 @@
         android:id="@+id/delete"
         android:layout_width="30dp"
         android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:translationY="-5dp"
+        app:backgroundTint="@color/white"
         app:cornerRadius="20dp"
         app:icon="@drawable/ic_cancel"
         app:iconGravity="top"
         app:iconSize="20dp"
+        app:iconTint="@color/gray_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

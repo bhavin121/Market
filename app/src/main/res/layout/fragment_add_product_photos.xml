@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
     tools:context=".AddProductPhotos">
 
     <TextView
@@ -12,7 +11,8 @@
         style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="50dp"
         android:text="@string/add_photos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,7 @@
         android:id="@+id/personalData"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="15dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/dashed_rounded_corner_rect"
         android:gravity="center"
@@ -67,7 +67,7 @@
         style="@style/ItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/chosen_photos"
         android:textSize="22sp"
@@ -76,25 +76,33 @@
 
     <LinearLayout
         android:id="@+id/chosenImageContainer"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="2dp"
-        android:layout_margin="15dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name">
 
         <TextView
             android:id="@+id/noImageChosen"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="30dp"
+            android:paddingHorizontal="30dp"
             android:text="@string/no_image"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:fontFamily="@font/simvoni"
             android:lineSpacingExtra="5dp"
             android:background="@drawable/rounded_corner_stroke"
             android:gravity="center"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photosList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:clipToPadding="false"/>
 
     </LinearLayout>
 

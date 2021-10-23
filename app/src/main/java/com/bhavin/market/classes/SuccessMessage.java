@@ -11,6 +11,10 @@ public class SuccessMessage {
     @Expose
     private String message;
 
+    @SerializedName("data")
+    @Expose
+    private String data;
+
     public String getMessage() {
         return message;
     }
@@ -19,4 +23,11 @@ public class SuccessMessage {
         this.message = message;
     }
 
+    public String getData( ){
+        return data;
+    }
+
+    public void setData(String data){
+        this.data = data;
+    }
 }

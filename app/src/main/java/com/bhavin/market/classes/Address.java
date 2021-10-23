@@ -139,4 +139,20 @@ public class Address {
     public String toString(){
         return streetLane+","+city+","+state+","+ country+",\n"+pincode+"\nMo."+phoneNo;
     }
+
+    public String toString(boolean a){
+        return "Address{" +
+                "addressId='" + addressId + '\'' +
+                ", pincode='" + pincode + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", streetLane='" + streetLane + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longtitude='" + longtitude + '\'' +
+                ", phoneNo='" + phoneNo + '\'' +
+                ", flagSeller='" + flagSeller + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/location" />
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rounded"
+        android:text="@string/currently_you_are_in"
+        android:textColor="@color/gray"
+        />
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_marginTop="10dp"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rounded"
+        android:text="@string/pindwara"
+        android:textColor="@color/purple_500"
+        android:textSize="36sp"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rounded"
+        android:text="@string/req"
+        android:textColor="@color/gray"
+        />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/yes"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_weight="1"
+            android:text="@string/yes"
+            android:textAllCaps="false"
+            app:cornerRadius="30dp"
+            app:backgroundTint="@color/green"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/no"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_weight="1"
+            android:text="@string/no"
+            android:textAllCaps="false"
+            app:cornerRadius="30dp"
+            app:backgroundTint="@color/pink_A200"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

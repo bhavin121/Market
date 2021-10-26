@@ -151,7 +151,7 @@
     <string name="hello">Hello</string>
     <string name="product_name">Product Name</string>
     <string name="product_details">Product Details</string>
-    <string name="price_">Price</string>
+    <string name="price_">Price (Original)</string>
     <string name="available_units">Available Units</string>
     <string name="minimum_selling_quantity">Minimum Selling Quantity</string>
     <string name="increment_size">Increment Size</string>
@@ -166,4 +166,12 @@
     <string name="color_name">Color Name</string>
     <string name="size">Size</string>
     <string name="add_address">Add Address</string>
+    <string name="discount">Discount %</string>
+    <string name="currently_you_are_in">Currently you are in</string>
+    <string name="pindwara">Pindwara</string>
+    <string name="req">Would you like to see shops in this city</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="na">NA</string>
+    <string name="no_more_seller">No more seller</string>
 </resources>

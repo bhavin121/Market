@@ -44,6 +44,18 @@
             android:importantForAutofill="no"
             android:inputType="numberDecimal" />
 
+        <EditText
+            android:id="@+id/discount"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/discount"
+            style="@style/TextInputField"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            />
+
         <Spinner
             android:id="@+id/unitOfSell"
             android:layout_width="match_parent"
@@ -158,7 +170,7 @@
             android:layout_height="wrap_content"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/registerButton"
+            android:id="@+id/addAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"

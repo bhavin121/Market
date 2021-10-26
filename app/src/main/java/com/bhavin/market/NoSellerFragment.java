@@ -54,7 +54,7 @@ public class NoSellerFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view , @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState){
         super.onViewCreated(view , savedInstanceState);
 
-        binding.registerButton.setOnClickListener(view1 -> {
+        binding.addAddress.setOnClickListener(view1 -> {
             activityResultLauncher.launch(new Intent(requireContext(), SellerRegistrationActivity.class));
         });
     }

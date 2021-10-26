@@ -1,13 +1,17 @@
 package com.bhavin.market.adapters;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bhavin.market.R;
+import com.bhavin.market.classes.Seller;
 import com.bhavin.market.databinding.CategoriesBinding;
 import com.bhavin.market.databinding.ShopCardBinding;
+import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -21,9 +25,13 @@ public class HomeAdapter extends RecyclerView.Adapter< RecyclerView.ViewHolder >
     public static final int CATEGORIES = 1;
     public static final int SELLERS = 2;
 
-    private List<String> items;
+    private List<Seller> items;
 
-    public HomeAdapter(List < String > items){
+    public HomeAdapter(List < Seller > items){
+        this.items = items;
+    }
+
+    public void setItems(List<Seller> items){
         this.items = items;
     }
 
@@ -54,7 +62,15 @@ public class HomeAdapter extends RecyclerView.Adapter< RecyclerView.ViewHolder >
                 break;
             default:
                 VH2 vh2 = (VH2) holder;
-                vh2.binding.shopName.setText(items.get(p));
+                vh2.binding.shopName.setText(items.get(p).getEmail());
+
+                Glide.with(vh2.itemView.getContext())
+                        .load(items.get(p).getBannerUrl())
+                        .centerCrop()
+                        .placeholder(new ColorDrawable(Color.GRAY))
+                        .into(vh2.binding.shopBanner);
+                vh2.binding.shopAddress.setText(items.get(p).getStreetLane());
+                vh2.binding.shopRating.setText(items.get(p).getAvgRating());
         }
     }
 

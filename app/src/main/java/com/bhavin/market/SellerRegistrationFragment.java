@@ -87,7 +87,7 @@ public class SellerRegistrationFragment extends Fragment {
             activityResultLauncher.launch(intent);
         });
 
-        binding.registerButton.setOnClickListener(view1 -> registerSeller());
+        binding.addAddress.setOnClickListener(view1 -> registerSeller());
 
         adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.categories, android.R.layout.simple_spinner_item);

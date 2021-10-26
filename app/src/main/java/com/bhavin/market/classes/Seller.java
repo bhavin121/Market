@@ -48,6 +48,14 @@ public class Seller {
     @Expose
     private String fulfilledOrders;
 
+    @SerializedName("street_lane")
+    @Expose
+    private String streetLane;
+
+    @SerializedName("avg_rating")
+    @Expose
+    private String avgRating;
+
     public String getEmail() {
         return email;
     }
@@ -152,4 +160,19 @@ public class Seller {
         this.fulfilledOrders = fulfilledOrders;
     }
 
+    public String getStreetLane( ){
+        return streetLane;
+    }
+
+    public void setStreetLane(String streetLane){
+        this.streetLane = streetLane;
+    }
+
+    public String getAvgRating( ){
+        return avgRating;
+    }
+
+    public void setAvgRating(String avgRating){
+        this.avgRating = avgRating;
+    }
 }

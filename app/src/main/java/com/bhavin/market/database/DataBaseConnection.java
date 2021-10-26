@@ -4,7 +4,6 @@ import android.content.Context;
 import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import androidx.annotation.Nullable;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -12,15 +11,19 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bhavin.market.classes.Address;
+import com.bhavin.market.classes.Color;
 import com.bhavin.market.classes.DataBaseError;
 import com.bhavin.market.classes.FAQ;
+import com.bhavin.market.classes.Product;
 import com.bhavin.market.classes.Seller;
 import com.bhavin.market.classes.SellerData;
+import com.bhavin.market.classes.SellersDataList;
 import com.bhavin.market.classes.SuccessMessage;
 import com.bhavin.market.classes.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataBaseConnection {
@@ -80,11 +83,62 @@ public class DataBaseConnection {
         establishConnection(context, map, url, Request.Method.POST, listener, SellerData.class);
     }
 
-    public static void addNewProduct(){
-        String url = "http://44akash44.great-site.net/seller_registration.php";
+    public static void updateCurrentAddress(Context context, String userId, String addressId, ConnectionListener<SuccessMessage> listener){
+        String url = "http://44akash44.great-site.net/update_current_address.php"; // API Url
 
         Map<String, String> map = new HashMap<>();
         map.put("key", KEY);
+        map.put("email", userId);
+        map.put("addressId", addressId);
+
+        establishConnection(context, map, url, Request.Method.POST, listener, SuccessMessage.class);
+    }
+
+    public static void fetchSellersInCity(Context context, String city, String pageToken, ConnectionListener<SellersDataList> listener){
+        String url = "http://44akash44.great-site.net/fetch_seller.php"; // API Url
+
+        Map<String, String> map = new HashMap<>();
+        map.put("key", KEY);
+        map.put("city", city);
+        if(pageToken != null) map.put("pagetoken", pageToken);
+
+        establishConnection(context, map, url, Request.Method.POST, listener, SellersDataList.class);
+    }
+
+    public static void addNewProduct(Context context, Product product, List<String> photos, List<String> sizes, List<Color> colors, ConnectionListener<SuccessMessage> listener){
+        String url = "http://44akash44.great-site.net/add-product1.php";
+
+        Map<String, String> map = new HashMap<>();
+        map.put("key", KEY);
+        map.put("name", product.getName());
+        map.put("offer", product.getOffer());
+        map.put("description", product.getDescription());
+        map.put("price",product.getPrice());
+        map.put("available_units", product.getAvailableUnits());
+        map.put("minimum_selling_quantity", product.getMinimumSellingQuantity());
+        map.put("unit_of_selling", product.getUnitOfSelling());
+        map.put("increment_size", product.getIncrementSize());
+
+        int i=0;
+        for ( String photo : photos ) {
+            map.put("url["+i+"]", photo);
+            i++;
+        }
+
+        i=0;
+        for ( String size: sizes ){
+            map.put("value["+i+"]", size);
+            i++;
+        }
+
+        i=0;
+        for ( Color color: colors ){
+            map.put("colorName["+i+"]", color.getName());
+            map.put("color["+i+"]", color.getColor());
+            i++;
+        }
+
+        establishConnection(context, map, url, Request.Method.POST, listener, SuccessMessage.class);
     }
 
     public static void addNewAddress(Context context, Address address, ConnectionListener<SuccessMessage> listener){
@@ -104,11 +158,11 @@ public class DataBaseConnection {
     }
 
     public static void fetchFAQs(Context context, ConnectionListener<FAQ> listener){
-        String url = "http://44akash44.great-site.net/";
-        Map<String, String> map = new HashMap<>();
-        map.put("key", KEY);
-        establishConnection(context, map, url, Request.Method.POST, listener, FAQ.class);
+        String url = "http://44akash44.great-site.net/ques-ans.php";
+        establishConnection(context, null, url, Request.Method.POST, listener, FAQ.class);
     }
+
+
 
     private static <T> void establishConnection(Context context, Map<String, String> map, String url, int requestType, ConnectionListener<T> listener, Class<T> type){
         RequestQueue queue = Volley.newRequestQueue(context);

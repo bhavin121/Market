@@ -4,6 +4,8 @@ import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 @Generated("jsonschema2pojo")
 public class User {
 
@@ -31,6 +33,9 @@ public class User {
     @SerializedName("contact_no")
     @Expose
     private String contactNo;
+    @SerializedName("address")
+    @Expose
+    private List<Address> address = null;
 
     public String getEmail() {
         return email;
@@ -102,5 +107,22 @@ public class User {
 
     public void setFlagSeller(boolean var){
         flagSeller = (var)?"1":"0";
+    }
+
+    public List<Address> getAddress( ){
+        return address;
+    }
+
+    public void setAddress(List<Address> address){
+        this.address = address;
+    }
+
+    public Address getCurrentAddressObj(){
+        for ( int i = 0 ; i < address.size() ; i++ ) {
+            if(address.get(i).getAddressId().equals(currAddress)){
+                return address.get(i);
+            }
+        }
+        return null;
     }
 }

@@ -21,12 +21,6 @@ public class FAQViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<Pair<Boolean,FAQ>> getFAQs(){
-        MutableLiveData<Pair<Boolean, FAQ>> res = new MutableLiveData<>(new Pair<>(false, null));
-        repository.getFAQs().observe(getApplication() , booleanFAQPair -> {
-            if(booleanFAQPair.first){
-                res.postValue(new Pair<>(true, booleanFAQPair.second));
-            }
-        });
-        return res;
+        return repository.getFAQs();
     }
 }

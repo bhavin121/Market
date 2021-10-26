@@ -25,6 +25,8 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class AuthRepository {
@@ -50,6 +52,9 @@ public class AuthRepository {
         DataBaseConnection.validateUser(application , userName , password , new DataBaseConnection.ConnectionListener < User >() {
             @Override
             public void onSuccess(User user){
+                if(user.getAddress() == null){
+                    user.setAddress(new ArrayList<>());
+                }
                 Pair<User, DataBaseError> pair = new Pair <>(user, null);
                 logInLiveData.postValue(pair);
             }
@@ -124,6 +129,10 @@ public class AuthRepository {
 
     public void signOutOTP(){
         firebaseAuth.signOut();
+    }
+
+    public void signOut(){
+        googleSignInClient.signOut();
     }
 
     public GoogleSignInAccount getLastSignedInAccount(){

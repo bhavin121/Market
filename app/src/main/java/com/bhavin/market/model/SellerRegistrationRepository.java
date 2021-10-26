@@ -4,14 +4,16 @@ import android.app.Application;
 import android.net.Uri;
 import android.util.Pair;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 
 import com.bhavin.market.Helper;
 import com.bhavin.market.classes.Address;
+import com.bhavin.market.classes.Color;
 import com.bhavin.market.classes.DataBaseError;
+import com.bhavin.market.classes.Product;
 import com.bhavin.market.classes.Seller;
 import com.bhavin.market.classes.SellerData;
+import com.bhavin.market.classes.SuccessMessage;
 import com.bhavin.market.database.DataBaseConnection;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -70,8 +72,22 @@ public class SellerRegistrationRepository {
         return res;
     }
 
-    public void addNewProduct(){
+    public MutableLiveData<Pair<Boolean,Product>> addNewProduct(Product product, List<String> photos, List<String> sizes, List<Color> colors){
+        MutableLiveData<Pair<Boolean, Product>> res = new MutableLiveData<>(new Pair<>(false, null));
+        DataBaseConnection.addNewProduct(application , product , photos , sizes , colors , new DataBaseConnection.ConnectionListener<SuccessMessage>() {
+            @Override
+            public void onSuccess(SuccessMessage successMessage){
+                product.setProductId(successMessage.getData());
+                res.postValue(new Pair<>(true, product));
+            }
 
+            @Override
+            public void onFailure(DataBaseError error){
+                res.postValue(new Pair<>(true, null));
+            }
+        });
+
+        return res;
     }
 
     public MutableLiveData<Pair<Boolean,SellerData>> registerSeller(Seller seller, Address address){

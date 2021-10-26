@@ -1,6 +1,7 @@
 package com.bhavin.market;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +10,20 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Toast;
 import com.bhavin.market.adapters.AddressAdapter;
 import com.bhavin.market.adapters.HomeAdapter;
 import com.bhavin.market.classes.Address;
+import com.bhavin.market.customViews.LoadingDialogBuilder;
 import com.bhavin.market.databinding.AddAddressDialogBinding;
 import com.bhavin.market.databinding.AddressDialogBinding;
 import com.bhavin.market.databinding.FragmentHomeBinding;
@@ -25,7 +31,10 @@ import com.bhavin.market.viewModels.HomeViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.NotNull;
+
+import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -36,6 +45,10 @@ public class HomeFragment extends Fragment {
     private Address address;
     private AddAddressDialogBinding addressBinding;
     private HomeViewModel viewModel;
+    private AddressAdapter adapter;
+    private HomeAdapter homeAdapter;
+    private AlertDialog loading;
+    private boolean isScrolling = false;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -79,16 +92,75 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view , savedInstanceState);
 
         viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        loading = LoadingDialogBuilder.build(requireContext());
 
         buildAddressDialog();
         buildAddAddressDialog();
 
-        List<String> items = Arrays.asList("Fist","Second","Third", "Fourth");
-        HomeAdapter adapter = new HomeAdapter(items);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.recyclerView.setAdapter(adapter);
+        fetchSellers(Helper.user.getCurrentAddressObj().getCity());
 
+        homeAdapter = new HomeAdapter(viewModel.getSellersDataList().getData());
+
+        LinearLayoutManager manager = new LinearLayoutManager(requireContext());
+        binding.recyclerView.setLayoutManager(manager);
+        binding.recyclerView.setAdapter(homeAdapter);
+
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView , int newState){
+                super.onScrollStateChanged(recyclerView , newState);
+                if(newState ==AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                    isScrolling = true;
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView , int dx , int dy){
+                super.onScrolled(recyclerView , dx , dy);
+                int visibleItems = manager.getChildCount();
+                int totalItems = manager.getItemCount();
+                int scrolledOutItems = manager.findFirstVisibleItemPosition();
+
+                if(isScrolling && (scrolledOutItems+visibleItems == totalItems)){
+//                    System.out.println(MessageFormat.format("VI {0} TOTAL {1} SO {2}", visibleItems, totalItems, scrolledOutItems));
+                    isScrolling = false;
+                    fetchSellers(viewModel.getCity());
+                }
+            }
+        });
+
+        if(Helper.user.getCurrentAddressObj() != null){
+            binding.address.setText(MessageFormat.format("{0},{1}" , Helper.user.getCurrentAddressObj().getStreetLane() , Helper.user.getCurrentAddressObj().getCity()));
+        }
         binding.addressButton.setOnClickListener(view1 -> addressDialog.show());
+    }
+
+    public void fetchSellers(String city){
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.noMoreSeller.setVisibility(View.GONE);
+        viewModel.fetchSellersInCity(requireActivity(), city)
+                .observe(requireActivity() , integer -> {
+                    if(integer == null) return;
+                    binding.progressBar.setVisibility(View.GONE);
+                    switch (integer){
+                        case HomeViewModel.NEW_DATA_SET_ADDED:
+                            homeAdapter.notifyDataSetChanged();
+                            break;
+                        case HomeViewModel.NO_MORE_DATA:
+                            binding.noMoreSeller.setVisibility(View.VISIBLE);
+//                            Toast.makeText(requireContext() , "No more sellers" , Toast.LENGTH_SHORT).show();
+                            break;
+                        case HomeViewModel.NO_SELLER_IN_CITY:
+                            break;
+                        case HomeViewModel.MORE_DATA_ADDED:
+                            int count = viewModel.getSellersDataList().getSize() - viewModel.getSellersDataList().getLastSize();
+                            homeAdapter.notifyItemRangeInserted(viewModel.getSellersDataList().getLastSize()+2, count);
+                            break;
+                        case HomeViewModel.DATA_FETCH_FAILED:
+                            Toast.makeText(requireContext() , "Something went wrong" , Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                });
     }
 
     private void buildAddAddressDialog(){
@@ -96,7 +168,7 @@ public class HomeFragment extends Fragment {
         addAddressDialog = new BottomSheetDialog(requireContext(), R.style.SheetDialog);
         addAddressDialog.setContentView(addressBinding.getRoot());
 
-        addressBinding.registerButton.setOnClickListener(view -> {
+        addressBinding.addAddress.setOnClickListener(view -> {
             addAddressDialog.dismiss();
             address.setPincode(addressBinding.pinCode.getText().toString());
             address.setCity(addressBinding.city.getText().toString());
@@ -104,12 +176,26 @@ public class HomeFragment extends Fragment {
             address.setCountry(addressBinding.country.getText().toString());
             address.setStreetLane(addressBinding.street.getText().toString());
             address.setPhoneNo(addressBinding.contactNo.getText().toString());
+
+            // show loading dialog
+            loading.show();
             viewModel.addNewAddress(address).observe(requireActivity() , booleanAddressPair -> {
                 if(booleanAddressPair.first){
+                    loading.dismiss();
                     if(booleanAddressPair.second == null){
                         // Error occurred
                         Toast.makeText(requireContext() , "Adding address failed" , Toast.LENGTH_SHORT).show();
                     }else{
+                        Helper.user.setCurrAddress(booleanAddressPair.second.getAddressId());
+                        if(Helper.user.getAddress() == null){
+                            Helper.user.setAddress(Collections.singletonList(booleanAddressPair.second));
+                            adapter.notifyItemInserted(0);
+                        }else{
+                            Helper.user.getAddress().add(booleanAddressPair.second);
+                            adapter.notifyItemInserted(Helper.user.getAddress().size()-1);
+                        }
+                        binding.address.setText(MessageFormat.format("{0},{1}" , booleanAddressPair.second.getStreetLane() , booleanAddressPair.second.getCity()));
+                        adapter.swap(booleanAddressPair.second.getAddressId());
                         System.out.println(booleanAddressPair.second.toString(true));
                     }
                 }
@@ -127,11 +213,21 @@ public class HomeFragment extends Fragment {
             activityResultLauncher.launch(new Intent(requireContext(), MapsActivity.class));
         });
 
-        binding.saveChanges.setOnClickListener(view -> {
-
-        });
+        adapter = new AddressAdapter(Helper.user.getAddress());
 
         binding.list.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.list.setAdapter(new AddressAdapter(null));
+        binding.list.setAdapter(adapter);
+
+        binding.saveChanges.setOnClickListener(view -> {
+            loading.show();
+            viewModel.changeCurrentAddress(adapter.getChosenAddressId())
+                    .observe(requireActivity() , booleanStringPair -> {
+                        if(booleanStringPair.first){
+                            loading.dismiss();
+                            adapter.swap(booleanStringPair.second);
+                            this.binding.address.setText(MessageFormat.format("{0},{1}" , Helper.user.getCurrentAddressObj().getStreetLane() , Helper.user.getCurrentAddressObj().getCity()));
+                        }
+                    });
+        });
     }
 }

@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/address_shop" />
+                android:text="@string/na" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -64,8 +64,38 @@
     <View
         style="@style/Divider"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingBottom="50dp"
+        android:clipToPadding="false"/>
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        app:trackThickness="5dp"
+        app:trackCornerRadius="2.5dp"
+        app:trackColor="@color/lightGray"
+        android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/noMoreSeller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+            android:text="@string/no_more_seller"/>
+
+    </RelativeLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

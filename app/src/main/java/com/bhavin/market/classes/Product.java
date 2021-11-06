@@ -34,6 +34,12 @@ public class Product {
     @SerializedName("increment_size")
     @Expose
     private String incrementSize;
+    @SerializedName("avg_rating")
+    @Expose
+    private String avgRating;
+    @SerializedName("display_photo_url")
+    @Expose
+    private String displayPhotoUrl;
 
     public String getProductId() {
         return productId;
@@ -107,18 +113,36 @@ public class Product {
         this.incrementSize = incrementSize;
     }
 
+    public String getAvgRating(){
+        return avgRating;
+    }
+
+    public void setAvgRating(String avgRating){
+        this.avgRating = avgRating;
+    }
+
+    public String getDisplayPhotoUrl( ){
+        return displayPhotoUrl;
+    }
+
+    public void setDisplayPhotoUrl(String displayPhotoUrl){
+        this.displayPhotoUrl = displayPhotoUrl;
+    }
+
     @Override
     public String toString( ){
         return "Product{" +
                 "productId='" + productId + '\'' +
-                ", name='" + name + '\'' +
-                ", offer='" + offer + '\'' +
-                ", description='" + description + '\'' +
-                ", price='" + price + '\'' +
-                ", availableUnits='" + availableUnits + '\'' +
-                ", minimumSellingQuantity='" + minimumSellingQuantity + '\'' +
-                ", unitOfSelling='" + unitOfSelling + '\'' +
-                ", incrementSize='" + incrementSize + '\'' +
-                '}';
+                "\n name='" + name + '\'' +
+                "\n offer='" + offer + '\'' +
+                "\n description='" + description + '\'' +
+                "\n price='" + price + '\'' +
+                "\n availableUnits='" + availableUnits + '\'' +
+                "\n minimumSellingQuantity='" + minimumSellingQuantity + '\'' +
+                "\n unitOfSelling='" + unitOfSelling + '\'' +
+                "\n incrementSize='" + incrementSize + '\'' +
+                "\n avgRating='" + avgRating + '\'' +
+                "\n displayPhotoUrl='" + displayPhotoUrl + '\'' +
+                "\n}";
     }
 }

@@ -18,6 +18,12 @@ import com.google.android.material.button.MaterialButton;
 
 public class Counter extends LinearLayout {
 
+    public interface ChangeListener{
+        void onValueChange(String newVal);
+    }
+
+    private ChangeListener changeListener;
+
     private final String[] unitArray = new String[]{"Kg", "L", "g","m", ""};
 
     public static final int KG = 0;
@@ -111,7 +117,7 @@ public class Counter extends LinearLayout {
         }else{
             val = String.valueOf(counter);
         }
-
+        if(changeListener != null) changeListener.onValueChange(val);
         counterText.setText(val);
     }
 
@@ -124,6 +130,7 @@ public class Counter extends LinearLayout {
             }else{
                 val = String.valueOf(counter);
             }
+            if(changeListener != null) changeListener.onValueChange(val);
             counterText.setText(val);
         }else{
             Toast.makeText(getContext(), "Min Value", Toast.LENGTH_SHORT).show();
@@ -242,7 +249,11 @@ public class Counter extends LinearLayout {
         this.buttonBackgroundColor = buttonBackgroundColor;
     }
 
-    public int getTextColor() {
+    public void setChangeListener(ChangeListener changeListener){
+        this.changeListener = changeListener;
+    }
+
+    public int getTextColor( ) {
         return textColor;
     }
 

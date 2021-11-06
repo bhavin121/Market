@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.bhavin.market.adapters.AddressAdapter;
 import com.bhavin.market.adapters.HomeAdapter;
 import com.bhavin.market.classes.Address;
+import com.bhavin.market.classes.Seller;
 import com.bhavin.market.customViews.LoadingDialogBuilder;
 import com.bhavin.market.databinding.AddAddressDialogBinding;
 import com.bhavin.market.databinding.AddressDialogBinding;
@@ -49,6 +51,7 @@ public class HomeFragment extends Fragment {
     private HomeAdapter homeAdapter;
     private AlertDialog loading;
     private boolean isScrolling = false;
+    private boolean isFetchingSellers = false;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -97,9 +100,22 @@ public class HomeFragment extends Fragment {
         buildAddressDialog();
         buildAddAddressDialog();
 
-        fetchSellers(Helper.user.getCurrentAddressObj().getCity());
+        homeAdapter = new HomeAdapter(viewModel.getSellersDataList().getData() ,
+                new HomeAdapter.OnItemClickListener() {
+                    @Override
+                    public void onSellerClick(Seller seller){
+                        System.out.println(seller.toString());
+                        String data = new GsonBuilder().create().toJson(seller);
+                        Intent intent = new Intent(requireContext(), SellerDetailsActivity.class);
+                        intent.putExtra(SellerDetailsActivity.DATA, data);
+                        startActivity(intent);
+                    }
 
-        homeAdapter = new HomeAdapter(viewModel.getSellersDataList().getData());
+                    @Override
+                    public void onCategoriesClick(String categories){
+
+                    }
+                });
 
         LinearLayoutManager manager = new LinearLayoutManager(requireContext());
         binding.recyclerView.setLayoutManager(manager);
@@ -122,7 +138,6 @@ public class HomeFragment extends Fragment {
                 int scrolledOutItems = manager.findFirstVisibleItemPosition();
 
                 if(isScrolling && (scrolledOutItems+visibleItems == totalItems)){
-//                    System.out.println(MessageFormat.format("VI {0} TOTAL {1} SO {2}", visibleItems, totalItems, scrolledOutItems));
                     isScrolling = false;
                     fetchSellers(viewModel.getCity());
                 }
@@ -130,25 +145,32 @@ public class HomeFragment extends Fragment {
         });
 
         if(Helper.user.getCurrentAddressObj() != null){
+            fetchSellers(Helper.user.getCurrentAddressObj().getCity());
             binding.address.setText(MessageFormat.format("{0},{1}" , Helper.user.getCurrentAddressObj().getStreetLane() , Helper.user.getCurrentAddressObj().getCity()));
         }
         binding.addressButton.setOnClickListener(view1 -> addressDialog.show());
     }
 
     public void fetchSellers(String city){
-        binding.progressBar.setVisibility(View.VISIBLE);
-        binding.noMoreSeller.setVisibility(View.GONE);
+        if(isFetchingSellers) return;
+
+//        binding.progressBar.setVisibility(View.VISIBLE);
+//        binding.noMoreSeller.setVisibility(View.GONE);
+        homeAdapter.setNoMoreData(false);
+        isFetchingSellers = true;
         viewModel.fetchSellersInCity(requireActivity(), city)
                 .observe(requireActivity() , integer -> {
                     if(integer == null) return;
-                    binding.progressBar.setVisibility(View.GONE);
+                    isFetchingSellers = false;
+//                    binding.progressBar.setVisibility(View.GONE);
                     switch (integer){
                         case HomeViewModel.NEW_DATA_SET_ADDED:
                             homeAdapter.notifyDataSetChanged();
+                            homeAdapter.setNoMoreData(false);
                             break;
                         case HomeViewModel.NO_MORE_DATA:
-                            binding.noMoreSeller.setVisibility(View.VISIBLE);
-//                            Toast.makeText(requireContext() , "No more sellers" , Toast.LENGTH_SHORT).show();
+//                            binding.noMoreSeller.setVisibility(View.VISIBLE);
+                            homeAdapter.setNoMoreData(true);
                             break;
                         case HomeViewModel.NO_SELLER_IN_CITY:
                             break;

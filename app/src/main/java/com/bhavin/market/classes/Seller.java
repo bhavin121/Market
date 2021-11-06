@@ -38,12 +38,7 @@ public class Seller {
     @SerializedName("category")
     @Expose
     private String category;
-    @SerializedName("rating_id")
-    @Expose
-    private String ratingId;
-    @SerializedName("review_id")
-    @Expose
-    private String reviewId;
+
     @SerializedName("fulfilled_orders")
     @Expose
     private String fulfilledOrders;
@@ -70,6 +65,10 @@ public class Seller {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getTiming(){
+        return timingStart + " - "+timingEnd;
     }
 
     public String getShopName() {
@@ -136,22 +135,6 @@ public class Seller {
         this.category = category;
     }
 
-    public String getRatingId() {
-        return ratingId;
-    }
-
-    public void setRatingId(String ratingId) {
-        this.ratingId = ratingId;
-    }
-
-    public String getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(String reviewId) {
-        this.reviewId = reviewId;
-    }
-
     public String getFulfilledOrders() {
         return fulfilledOrders;
     }
@@ -160,7 +143,7 @@ public class Seller {
         this.fulfilledOrders = fulfilledOrders;
     }
 
-    public String getStreetLane( ){
+    public String getStreetLane(){
         return streetLane;
     }
 
@@ -168,11 +151,30 @@ public class Seller {
         this.streetLane = streetLane;
     }
 
-    public String getAvgRating( ){
+    public String getAvgRating(){
         return avgRating;
     }
 
     public void setAvgRating(String avgRating){
         this.avgRating = avgRating;
+    }
+
+    @Override
+    public String toString(){
+        return "Seller{" +
+                "email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", registrationDate='" + registrationDate + '\'' +
+                ", timingStart='" + timingStart + '\'' +
+                ", timingEnd='" + timingEnd + '\'' +
+                ", bannerUrl='" + bannerUrl + '\'' +
+                ", gstNo='" + gstNo + '\'' +
+                ", serviceCity='" + serviceCity + '\'' +
+                ", category='" + category + '\'' +
+                ", fulfilledOrders='" + fulfilledOrders + '\'' +
+                ", streetLane='" + streetLane + '\'' +
+                ", avgRating='" + avgRating + '\'' +
+                '}';
     }
 }

@@ -174,4 +174,11 @@
     <string name="no">No</string>
     <string name="na">NA</string>
     <string name="no_more_seller">No more seller</string>
+    <string name="order_total">Order Total</string>
+    <string name="delivery_charge">Delivery Charge</string>
+    <string name="total_payable">Total Payable</string>
+    <string name="_679">679</string>
+    <string name="_20">20</string>
+    <string name="_699">699</string>
+    <string name="pay_now">Pay Now</string>
 </resources>

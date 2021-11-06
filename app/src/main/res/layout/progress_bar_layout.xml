@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        app:trackThickness="5dp"
+        app:trackCornerRadius="2.5dp"
+        app:trackColor="@color/lightGray" />
+
+    <TextView
+        android:id="@+id/noMoreSeller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+        android:text="@string/no_more_seller"/>
+
+</RelativeLayout>

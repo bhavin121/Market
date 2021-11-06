@@ -1,5 +1,6 @@
 package com.bhavin.market.database;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.webkit.CookieManager;
 import android.webkit.WebView;
@@ -15,6 +16,8 @@ import com.bhavin.market.classes.Color;
 import com.bhavin.market.classes.DataBaseError;
 import com.bhavin.market.classes.FAQ;
 import com.bhavin.market.classes.Product;
+import com.bhavin.market.classes.ProductDataList;
+import com.bhavin.market.classes.ReviewDataList;
 import com.bhavin.market.classes.Seller;
 import com.bhavin.market.classes.SellerData;
 import com.bhavin.market.classes.SellersDataList;
@@ -162,8 +165,39 @@ public class DataBaseConnection {
         establishConnection(context, null, url, Request.Method.POST, listener, FAQ.class);
     }
 
+    public static void fetchSellerAddress(Context context, String userId, ConnectionListener<Address> listener){
+        String url = "http://44akash44.great-site.net/fetch_address_of_seller.php"; // API Url
 
+        Map<String, String> map = new HashMap<>();
+        map.put("key", KEY);
+        map.put("email", userId);
 
+        establishConnection(context, map, url, Request.Method.POST, listener, Address.class);
+    }
+
+    public static void fetchReviews(Context context , String id ,String pageToken, ConnectionListener<ReviewDataList> listener){
+        String url = "http://44akash44.great-site.net/review.php"; // API Url
+
+        Map<String, String> map = new HashMap<>();
+        map.put("key", KEY);
+        map.put("email",id);
+        if(pageToken != null) map.put("pagetoken", pageToken);
+
+        establishConnection(context, map, url, Request.Method.POST, listener, ReviewDataList.class);
+    }
+
+    public static void fetchProducts(Context context, String sellerId, String pageToken, ConnectionListener<ProductDataList> listener){
+        String url = "http://44akash44.great-site.net/seller_product.php"; // API Url
+
+        Map<String, String> map = new HashMap<>();
+        map.put("key", KEY);
+        map.put("email",sellerId);
+        if(pageToken != null) map.put("pagetoken", pageToken);
+
+        establishConnection(context, map, url, Request.Method.POST, listener, ProductDataList.class);
+    }
+
+    @SuppressLint ("SetJavaScriptEnabled")
     private static <T> void establishConnection(Context context, Map<String, String> map, String url, int requestType, ConnectionListener<T> listener, Class<T> type){
         RequestQueue queue = Volley.newRequestQueue(context);
         WebView webView = new WebView(context);
